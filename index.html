@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Matemática Challenge | Cálculo Diferencial</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <main class="contenedor">
+
+        <!-- ENCABEZADO -->
+        <header class="encabezado">
+            <div class="logo">∑</div>
+            <h1>Matemática Challenge</h1>
+            <p>¡Pon a prueba tus conocimientos de Cálculo Diferencial!</p>
+        </header>
+
+        <!-- PANTALLA DE INICIO -->
+        <section id="pantalla-inicio" class="tarjeta pantalla">
+            <h2>¡Bienvenido al desafío!</h2>
+
+            <p class="descripcion">
+                Resuelve preguntas de Cálculo Diferencial, demuestra lo que sabes
+                y mejora tu puntuación en cada partida.
+            </p>
+
+            <div class="campo">
+                <label for="nombre-jugador">Nombre del jugador</label>
+                <input
+                    type="text"
+                    id="nombre-jugador"
+                    placeholder="Escribe tu nombre"
+                    maxlength="40"
+                    autocomplete="given-name"
+                >
+            </div>
+
+            <div class="campo">
+                <label for="nivel-dificultad">Nivel de dificultad</label>
+                <select id="nivel-dificultad">
+                    <option value="todos">Todos los niveles</option>
+                    <option value="basico">Básico</option>
+                    <option value="intermedio">Intermedio</option>
+                    <option value="avanzado">Avanzado</option>
+                </select>
+            </div>
+
+            <div class="informacion-partida">
+                <div class="dato">
+                    <span class="dato-numero">5</span>
+                    <span class="dato-texto">Preguntas</span>
+                </div>
+
+                <div class="dato">
+                    <span class="dato-numero">30 s</span>
+                    <span class="dato-texto">Por pregunta</span>
+                </div>
+
+                <div class="dato">
+                    <span class="dato-numero">3</span>
+                    <span class="dato-texto">Dificultades</span>
+                </div>
+            </div>
+
+            <button type="button" id="btn-comenzar" class="boton boton-principal">
+                Comenzar partida
+            </button>
+
+            <p id="mensaje-inicio" class="mensaje" role="alert"></p>
+        </section>
+
+        <!-- PANTALLA DEL JUEGO -->
+        <section id="pantalla-juego" class="tarjeta pantalla oculta">
+
+            <div class="barra-superior">
+                <div>
+                    <span class="etiqueta">Jugador</span>
+                    <strong id="nombre-mostrado">Jugador</strong>
+                </div>
+
+                <div>
+                    <span class="etiqueta">Puntuación</span>
+                    <strong id="puntuacion">0</strong>
+                </div>
+            </div>
+
+            <div class="progreso-contenedor">
+                <div class="progreso-texto">
+                    <span id="numero-pregunta">Pregunta 1 de 5</span>
+                    <span id="nivel-mostrado" class="etiqueta-nivel">Básico</span>
+                </div>
+
+                <div
+                    class="barra-progreso"
+                    role="progressbar"
+                    aria-label="Progreso de la partida"
+                    aria-valuemin="0"
+                    aria-valuemax="5"
+                    aria-valuenow="0"
+                    id="progreso"
+                >
+                    <div id="progreso-relleno"></div>
+                </div>
+            </div>
+
+            <div class="temporizador-contenedor">
+                <span>Tiempo restante</span>
+                <strong id="temporizador" aria-live="polite">30 s</strong>
+            </div>
+
+            <div class="pregunta-contenedor">
+                <span id="categoria-pregunta" class="categoria">
+                    Derivadas
+                </span>
+
+                <h2 id="texto-pregunta">Aquí aparecerá la pregunta.</h2>
+            </div>
+
+            <div id="alternativas" class="alternativas">
+                <!-- Las alternativas se generarán con JavaScript. -->
+            </div>
+
+            <div id="zona-explicacion" class="zona-explicacion oculta" aria-live="polite">
+                <h3 id="resultado-respuesta"></h3>
+                <p id="explicacion-respuesta"></p>
+            </div>
+
+            <button
+                type="button"
+                id="btn-siguiente"
+                class="boton boton-principal oculta"
+            >
+                Siguiente pregunta
+            </button>
+
+        </section>
+
+        <!-- PANTALLA DE RESULTADOS -->
+        <section id="pantalla-resultados" class="tarjeta pantalla oculta">
+
+            <div class="icono-resultado">🏆</div>
+
+            <h2 id="titulo-resultado">¡Partida terminada!</h2>
+
+            <p id="mensaje-resultado" class="descripcion">
+                Estos son los resultados de tu desafío.
+            </p>
+
+            <div class="resultado-puntuacion">
+                <span>Tu puntuación</span>
+                <strong id="puntuacion-final">0</strong>
+                <span>puntos</span>
+            </div>
+
+            <div class="estadisticas">
+                <div class="estadistica">
+                    <strong id="respuestas-correctas">0</strong>
+                    <span>Correctas</span>
+                </div>
+
+                <div class="estadistica">
+                    <strong id="respuestas-incorrectas">0</strong>
+                    <span>Incorrectas</span>
+                </div>
+
+                <div class="estadistica">
+                    <strong id="porcentaje-final">0%</strong>
+                    <span>Porcentaje</span>
+                </div>
+            </div>
+
+            <p id="mensaje-nuevas-preguntas" class="mensaje-final">
+                ¡Prepárate para un nuevo desafío!
+            </p>
+
+            <button
+                type="button"
+                id="btn-volver-jugar"
+                class="boton boton-principal"
+            >
+                Volver a jugar
+            </button>
+
+            <button
+                type="button"
+                id="btn-cambiar-nivel"
+                class="boton boton-secundario"
+            >
+                Cambiar nivel
+            </button>
+
+        </section>
+
+        <!-- PIE DE PÁGINA -->
+        <footer class="pie-pagina">
+            <p>Matemática Challenge · Aprende, practica y supera tus límites.</p>
+        </footer>
+
+    </main>
+</body>
+</html>
